@@ -1,0 +1,9 @@
+PointBlank Wholesale Catalog — Placeholder
+
+This is a placeholder for the full wholesale catalog PDF.
+Replace public/downloads/wholesale-catalog-placeholder.txt with a real
+generated PDF (e.g. wholesale-catalog.pdf) and update the link in
+app/(retailer)/downloads/page.tsx.
+
+Suggested contents: full product grid with SKU, dimensions, pack size,
+wholesale price, and MSRP for every active collection.

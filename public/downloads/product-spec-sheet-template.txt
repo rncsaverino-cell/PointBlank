@@ -1,0 +1,14 @@
+PointBlank Product Spec Sheet — Placeholder Template
+
+Product Name:
+SKU:
+Collection:
+Dimensions:
+Paper Weight / Finish:
+Pack Quantity:
+Wholesale Price:
+Suggested Retail Price:
+Minimum Order Quantity:
+
+Replace this placeholder with real per-product spec sheets (PDF) generated
+from the products table.
