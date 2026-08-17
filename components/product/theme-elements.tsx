@@ -1,4 +1,4 @@
-import { Star, Biohazard } from "lucide-react";
+import { Star, Biohazard, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Custom flying-saucer glyph — lucide-react has no UFO icon, so this is
@@ -124,6 +124,48 @@ function HelicopterIllustration() {
   );
 }
 
+// Decorative glowing eyes in the fog for the Monster Hunt backdrop — the
+// "something in the dark forest is watching you" counterpart to the other
+// worlds' floating motifs. Slit pupils are cut from the eye shape with a
+// background-colored ellipse so it works over any photo behind it.
+function EyesIllustration() {
+  return (
+    <div className="absolute right-[9%] top-10 hidden animate-float sm:block">
+      <svg width="160" height="90" viewBox="0 0 160 90" fill="none">
+        <defs>
+          <radialGradient id="eyes-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="80" cy="45" rx="80" ry="45" fill="url(#eyes-glow)" opacity="0.35" />
+        <g className="animate-beam-pulse">
+          <ellipse cx="55" cy="45" rx="10" ry="6.5" fill="hsl(var(--primary))" className="[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.7))]" />
+          <ellipse cx="105" cy="45" rx="10" ry="6.5" fill="hsl(var(--primary))" className="[filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.7))]" />
+          <ellipse cx="55" cy="45" rx="3" ry="6.5" fill="hsl(var(--background))" />
+          <ellipse cx="105" cy="45" rx="3" ry="6.5" fill="hsl(var(--background))" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Claw-mark slashes for the Monster Hunt frame corner.
+function ClawMarks({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={cn("pointer-events-none absolute h-20 w-20 [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.6))]", className)}
+    >
+      <g stroke="hsl(var(--primary))" strokeWidth="5" strokeLinecap="round" opacity="0.85">
+        <path d="M12 18 L38 88" />
+        <path d="M32 8 L58 92" />
+        <path d="M52 2 L78 82" />
+      </g>
+    </svg>
+  );
+}
+
 // Worn "photo tape" corner mark for the Wild West frame — opaque cream tape
 // so it reads clearly as physical tape regardless of what photo is behind it.
 function TapeCorner({ className }: { className?: string }) {
@@ -157,6 +199,7 @@ const themeConfig = {
   "wild-west": { icon: Star, label: "Frontier Territory", texture: "dust" as const },
   "zombie-apocalypse": { icon: Biohazard, label: "Quarantine Zone", texture: "grime" as const },
   "alien-invasion": { icon: UfoIcon, label: "Restricted Sector", texture: "grid" as const },
+  "monster-hunt": { icon: Eye, label: "Predator Territory", texture: "fog" as const },
 };
 
 type ThemeSlug = keyof typeof themeConfig;
@@ -180,12 +223,13 @@ export function ThemeBackdrop({ slug }: { slug?: string }) {
       {texture === "grid" && (
         <div className="absolute inset-0 bg-grid opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
       )}
-      {(texture === "dust" || texture === "grime") && (
+      {(texture === "dust" || texture === "grime" || texture === "fog") && (
         <div className="bg-noise absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
       )}
       {slug === "alien-invasion" && <UfoIllustration />}
       {slug === "wild-west" && <StarBadgeIllustration />}
       {slug === "zombie-apocalypse" && <HelicopterIllustration />}
+      {slug === "monster-hunt" && <EyesIllustration />}
     </div>
   );
 }
@@ -248,6 +292,13 @@ export function ThemedFrame({
           <TapeCorner className="-top-2 right-6 rotate-6" />
           <BulletHole className="bottom-10 left-5" />
           <BulletHole className="bottom-24 right-8" />
+        </>
+      )}
+
+      {theme === "monster-hunt" && (
+        <>
+          <span className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_70px_hsl(var(--primary)/0.25)] ring-1 ring-primary/20" />
+          <ClawMarks className="right-2 top-2 rotate-6" />
         </>
       )}
     </div>

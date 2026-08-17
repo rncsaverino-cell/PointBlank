@@ -84,6 +84,18 @@ export const mockCollections: Collection[] = [
     active: false,
     created_at: "2025-01-20T00:00:00Z",
   },
+  {
+    id: "col-monster-hunt",
+    name: "Monster Hunt",
+    slug: "monster-hunt",
+    subtitle: "The wild is watching back.",
+    description:
+      "Apex predators lurking in the fog. A moody wilderness collection for hunters and range-goers who want their targets to feel alive.",
+    hero_image: img("monster-hunt", "0d1420", "3d8bc4", "MONSTER HUNT"),
+    sort_order: 7,
+    active: true,
+    created_at: "2026-08-17T00:00:00Z",
+  },
 ];
 
 const byCollection = (slug: string) =>
@@ -164,6 +176,31 @@ export const mockProducts: Product[] = [
     is_limited: false,
     is_range_favorite: true,
     created_at: "2025-08-01T00:00:00Z",
+  },
+  {
+    id: "prod-predators-path",
+    sku: "MH-PREDPATH-10T",
+    name: "Predator's Path",
+    slug: "predators-path",
+    description:
+      "A misty forest scene with 10 numbered apex predators and game animals stalking through the fog, from black bears to timber wolves.",
+    collection_id: "col-monster-hunt",
+    collection: byCollection("monster-hunt"),
+    wholesale_price: 26.0,
+    msrp: 44.99,
+    moq: 15,
+    pack_quantity: 15,
+    dimensions: '24 × 36 in',
+    paper_spec: "28lb premium target paper, matte finish",
+    inventory: 200,
+    status: "active",
+    image_url: "/products/predators-path.png",
+    gallery: [],
+    is_new: true,
+    is_bestseller: false,
+    is_limited: false,
+    is_range_favorite: false,
+    created_at: "2026-08-17T00:00:00Z",
   },
 ];
 
