@@ -9,6 +9,7 @@ export const collectionThemes: Record<string, { primary: string; primaryForegrou
   "zombie-apocalypse": { primary: "80 58% 42%", primaryForeground: "0 0% 100%" },
   "alien-invasion": { primary: "165 65% 42%", primaryForeground: "0 0% 100%" },
   "monster-hunt": { primary: "90 35% 32%", primaryForeground: "0 0% 100%" },
+  "dino-rampage": { primary: "35 85% 48%", primaryForeground: "0 0% 100%" },
 };
 
 export function getCollectionTheme(slug: string | undefined) {

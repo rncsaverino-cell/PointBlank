@@ -1,4 +1,4 @@
-import { Star, Biohazard, Eye } from "lucide-react";
+import { Star, Biohazard, Eye, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Custom flying-saucer glyph — lucide-react has no UFO icon, so this is
@@ -166,6 +166,61 @@ function ClawMarks({ className }: { className?: string }) {
   );
 }
 
+// Decorative smoking volcano for the Dino Rampage backdrop — a glowing
+// lava crater with drifting smoke, the "ancient world" counterpart to the
+// other worlds' floating motifs.
+function VolcanoIllustration() {
+  return (
+    <div className="absolute right-[8%] top-4 hidden animate-float sm:block">
+      <svg width="170" height="120" viewBox="0 0 170 120" fill="none">
+        <defs>
+          <radialGradient id="volcano-glow" cx="50%" cy="35%" r="50%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="85" cy="58" rx="80" ry="55" fill="url(#volcano-glow)" opacity="0.3" />
+        <g className="animate-beam-pulse" opacity="0.45">
+          <ellipse cx="85" cy="32" rx="16" ry="11" fill="hsl(var(--muted-foreground))" />
+          <ellipse cx="76" cy="16" rx="20" ry="13" fill="hsl(var(--muted-foreground))" />
+          <ellipse cx="92" cy="2" rx="24" ry="14" fill="hsl(var(--muted-foreground))" />
+        </g>
+        <path
+          d="M18 112 L85 38 L152 112 Z"
+          fill="hsl(var(--card))"
+          stroke="hsl(var(--primary))"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M71 56 L85 38 L99 56 Z"
+          fill="hsl(var(--primary))"
+          className="[filter:drop-shadow(0_0_10px_hsl(var(--primary)/0.8))]"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// Bite-mark puncture arc for the Dino Rampage frame corner.
+function BiteMarks({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 120 60"
+      className={cn("pointer-events-none absolute h-14 w-28 [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.6))]", className)}
+    >
+      <g fill="hsl(var(--primary))" opacity="0.85">
+        <path d="M10 40 L16 18 L22 40 Z" />
+        <path d="M28 45 L34 21 L40 45 Z" />
+        <path d="M46 48 L52 23 L58 48 Z" />
+        <path d="M64 48 L70 23 L76 48 Z" />
+        <path d="M82 45 L88 21 L94 45 Z" />
+        <path d="M100 40 L106 18 L112 40 Z" />
+      </g>
+    </svg>
+  );
+}
+
 // Worn "photo tape" corner mark for the Wild West frame — opaque cream tape
 // so it reads clearly as physical tape regardless of what photo is behind it.
 function TapeCorner({ className }: { className?: string }) {
@@ -200,6 +255,7 @@ const themeConfig = {
   "zombie-apocalypse": { icon: Biohazard, label: "Quarantine Zone", texture: "grime" as const },
   "alien-invasion": { icon: UfoIcon, label: "Restricted Sector", texture: "grid" as const },
   "monster-hunt": { icon: Eye, label: "Hunter's Path", texture: "fog" as const },
+  "dino-rampage": { icon: Flame, label: "Extinction Zone", texture: "ash" as const },
 };
 
 type ThemeSlug = keyof typeof themeConfig;
@@ -223,13 +279,14 @@ export function ThemeBackdrop({ slug }: { slug?: string }) {
       {texture === "grid" && (
         <div className="absolute inset-0 bg-grid opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
       )}
-      {(texture === "dust" || texture === "grime" || texture === "fog") && (
+      {(texture === "dust" || texture === "grime" || texture === "fog" || texture === "ash") && (
         <div className="bg-noise absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
       )}
       {slug === "alien-invasion" && <UfoIllustration />}
       {slug === "wild-west" && <StarBadgeIllustration />}
       {slug === "zombie-apocalypse" && <HelicopterIllustration />}
       {slug === "monster-hunt" && <EyesIllustration />}
+      {slug === "dino-rampage" && <VolcanoIllustration />}
     </div>
   );
 }
@@ -299,6 +356,13 @@ export function ThemedFrame({
         <>
           <span className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_70px_hsl(var(--primary)/0.25)] ring-1 ring-primary/20" />
           <ClawMarks className="right-2 top-2 rotate-6" />
+        </>
+      )}
+
+      {theme === "dino-rampage" && (
+        <>
+          <span className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_70px_hsl(var(--primary)/0.25)] ring-1 ring-primary/20" />
+          <BiteMarks className="left-1/2 top-0 -translate-x-1/2 -translate-y-2 rotate-180" />
         </>
       )}
     </div>
