@@ -7,6 +7,13 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
+// This app is entirely database-backed (auth, pricing, inventory, admin
+// edits) — nothing here should ever be frozen into a static build. Without
+// this, Next.js can prerender a page at build time based on whatever
+// environment/data state existed then and serve that same snapshot to
+// every visitor afterward, regardless of later changes.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     default: "PointBlank — Make Every Range Day Different.",
