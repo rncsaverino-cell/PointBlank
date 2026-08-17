@@ -21,11 +21,14 @@ export async function getCollections(): Promise<Collection[]> {
       .sort((a, b) => a.sort_order - b.sort_order);
   }
   const supabase = createClient()!;
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("collections")
     .select("*")
     .eq("active", true)
     .order("sort_order", { ascending: true });
+  if (error) {
+    console.error("getCollections error:", error.message, error.details, error.hint);
+  }
   return (data as Collection[]) ?? [];
 }
 
@@ -51,7 +54,10 @@ export async function getPublicProducts(): Promise<PublicProduct[]> {
       }));
   }
   const supabase = createClient()!;
-  const { data } = await supabase.from("public_products_preview").select("*");
+  const { data, error } = await supabase.from("public_products_preview").select("*");
+  if (error) {
+    console.error("getPublicProducts error:", error.message, error.details, error.hint);
+  }
   return (data ?? []).map((row: any) => ({
     id: row.id,
     name: row.name,
