@@ -14,18 +14,15 @@ export const metadata = { title: "Dashboard" };
 
 export default async function DashboardPage() {
   const profile = await getCurrentProfile();
-  const [orders, newReleases, bestSellers] = await Promise.all([
+  const [orders, newReleases, bestSellers, allProducts] = await Promise.all([
     profile ? getOrders(profile.id) : Promise.resolve([]),
     getProducts({ isNew: true, sort: "newest" }),
     getProducts({ isBestseller: true, sort: "bestselling" }),
+    getProducts({ sort: "newest" }),
   ]);
 
   const lifetimeSpend = orders.reduce((sum, o) => sum + o.total, 0);
   const openOrders = orders.filter((o) => o.status === "submitted" || o.status === "processing").length;
-
-  const orderedProductIds = new Set(orders.flatMap((o) => o.items?.map((i) => i.product_id) ?? []));
-  const recommended = bestSellers.filter((p) => orderedProductIds.has(p.id)).slice(0, 4);
-  const recommendedFallback = recommended.length > 0 ? recommended : bestSellers.slice(0, 4);
 
   return (
     <div className="container py-10">
@@ -93,13 +90,13 @@ export default async function DashboardPage() {
 
           <div className="mt-10">
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-xl font-semibold">Recommended Reorders</h2>
-              <Link href="/reorder" className="text-sm font-semibold text-primary hover:underline">
-                Reorder page →
+              <h2 className="font-display text-xl font-semibold">All Products</h2>
+              <Link href="/shop" className="text-sm font-semibold text-primary hover:underline">
+                Shop all →
               </Link>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {recommendedFallback.map((p) => (
+              {allProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
