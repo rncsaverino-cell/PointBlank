@@ -1,14 +1,9 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/product/product-card";
-import { getCollection, getCollections, getProducts } from "@/lib/data";
+import { getCollection, getProducts } from "@/lib/data";
 import { collectionThemeStyle } from "@/lib/theme";
 import { ThemeBackdrop, ThemeEyebrow } from "@/components/product/theme-elements";
-
-export async function generateStaticParams() {
-  const collections = await getCollections();
-  return collections.map((c) => ({ slug: c.slug }));
-}
 
 export default async function CollectionDetailPage({ params }: { params: { slug: string } }) {
   const collection = await getCollection(params.slug);
