@@ -1,5 +1,5 @@
-import { mockCollections, mockOrders, mockProducts, mockRetailers } from "./mock-data";
-import type { Collection, Order, Product, Profile, RetailerApplication } from "./types";
+import { mockCollections, mockLeads, mockOrders, mockProducts, mockRetailers } from "./mock-data";
+import type { Collection, Lead, Order, Product, Profile, RetailerApplication } from "./types";
 
 // In-memory mutable copy of the demo dataset used only when Supabase isn't
 // configured. This lets the admin portal (approve retailer, edit product,
@@ -17,6 +17,7 @@ declare global {
         retailers: Profile[];
         orders: Order[];
         applications: RetailerApplication[];
+        leads: Lead[];
       }
     | undefined;
 }
@@ -53,6 +54,7 @@ function init() {
     retailers: structuredClone(mockRetailers),
     orders: structuredClone(mockOrders),
     applications: buildApplications(),
+    leads: structuredClone(mockLeads),
   };
 }
 

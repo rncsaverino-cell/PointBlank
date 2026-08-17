@@ -1,7 +1,7 @@
 import { createClient } from "./supabase/server";
 import { isSupabaseConfigured } from "./supabase/is-configured";
 import { getDemoStore } from "./demo-store";
-import type { Collection, Order, Product, Profile, PublicProduct, RetailerApplication } from "./types";
+import type { Collection, Lead, Order, Product, Profile, PublicProduct, RetailerApplication } from "./types";
 
 export interface ProductFilters {
   collection?: string;
@@ -236,6 +236,17 @@ export async function getRetailers(): Promise<Profile[]> {
     .eq("role", "retailer")
     .order("created_at", { ascending: false });
   return (data as Profile[]) ?? [];
+}
+
+export async function getLeads(): Promise<Lead[]> {
+  if (!isSupabaseConfigured()) {
+    return [...getDemoStore().leads].sort(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+  }
+  const supabase = createClient()!;
+  const { data } = await supabase.from("leads").select("*").order("created_at", { ascending: false });
+  return (data as Lead[]) ?? [];
 }
 
 export async function getRetailerApplications(): Promise<RetailerApplication[]> {

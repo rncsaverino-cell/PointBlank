@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, LayoutDashboard, Users, Package, Layers, ClipboardList, Store } from "lucide-react";
+import { Menu, LayoutDashboard, Users, Package, Layers, ClipboardList, Store, Target } from "lucide-react";
 import { Logo } from "./logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 const links = [
   { href: "/admin", label: "Analytics", icon: LayoutDashboard },
   { href: "/admin/retailers", label: "Retailers", icon: Users },
+  { href: "/admin/leads", label: "Leads", icon: Target },
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/collections", label: "Collections", icon: Layers },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList },

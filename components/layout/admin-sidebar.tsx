@@ -10,6 +10,7 @@ import {
   ClipboardList,
   LogOut,
   Store,
+  Target,
 } from "lucide-react";
 import { Logo } from "./logo";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/admin", label: "Analytics", icon: LayoutDashboard, exact: true },
   { href: "/admin/retailers", label: "Retailers", icon: Users },
+  { href: "/admin/leads", label: "Leads", icon: Target },
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/collections", label: "Collections", icon: Layers },
   { href: "/admin/orders", label: "Orders", icon: ClipboardList },

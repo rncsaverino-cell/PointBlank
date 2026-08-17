@@ -148,6 +148,33 @@ insert into retailer_pricing (tier_name, discount_percent)
 values ('standard', 0), ('volume', 8), ('strategic', 15)
 on conflict (tier_name) do nothing;
 
+-- ─── leads ──────────────────────────────────────────────────────────────
+-- Prospective retailers/distributors found via outreach research — not the
+-- same as retailer_applications, which are self-submitted by a real user
+-- with a password. Admin-only (RLS policy added further down, once
+-- public.is_admin() exists).
+do $$ begin
+  create type lead_status as enum ('new', 'contacted', 'responded', 'converted', 'not_interested');
+exception when duplicate_object then null; end $$;
+
+create table if not exists leads (
+  id uuid primary key default gen_random_uuid(),
+  business_name text not null,
+  business_type text,
+  contact_name text,
+  email text,
+  phone text,
+  website text,
+  address text,
+  city text,
+  region text,
+  country text,
+  source text,
+  notes text,
+  status lead_status not null default 'new',
+  created_at timestamptz not null default now()
+);
+
 -- ─── Helper: is the current user an admin? ─────────────────────────────
 create or replace function public.is_admin()
 returns boolean as $$
@@ -239,6 +266,11 @@ create policy "order_items_insert_own" on order_items
 drop policy if exists "retailer_pricing_select_all" on retailer_pricing;
 create policy "retailer_pricing_select_all" on retailer_pricing
   for select using (true);
+
+alter table leads enable row level security;
+drop policy if exists "leads_admin_only" on leads;
+create policy "leads_admin_only" on leads
+  for all using (public.is_admin()) with check (public.is_admin());
 
 -- ─── Public preview view (no pricing / inventory) ──────────────────────
 -- Used by the public marketing pages so unauthenticated visitors can see

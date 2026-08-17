@@ -2,6 +2,7 @@ export type UserRole = "retailer" | "admin";
 export type RetailerStatus = "pending" | "approved" | "rejected" | "suspended";
 export type ProductStatus = "active" | "draft" | "archived";
 export type OrderStatus = "draft" | "submitted" | "processing" | "shipped" | "delivered";
+export type LeadStatus = "new" | "contacted" | "responded" | "converted" | "not_interested";
 
 export interface Profile {
   id: string;
@@ -115,6 +116,24 @@ export interface OrderItem {
   quantity: number;
   unit_price: number;
   product?: Product;
+}
+
+export interface Lead {
+  id: string;
+  business_name: string;
+  business_type: string | null;
+  contact_name: string | null;
+  email: string | null;
+  phone: string | null;
+  website: string | null;
+  address: string | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  source: string | null;
+  notes: string | null;
+  status: LeadStatus;
+  created_at: string;
 }
 
 export interface CartItem {

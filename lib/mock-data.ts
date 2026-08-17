@@ -1,4 +1,4 @@
-import type { Collection, Order, Product, Profile } from "./types";
+import type { Collection, Lead, Order, Product, Profile } from "./types";
 
 // Demo-mode content. This mirrors supabase/seed.sql so the storefront
 // renders fully populated even before a real Supabase project is wired up.
@@ -319,5 +319,25 @@ export const mockOrders: Order[] = [
     items: [
       { id: "oi-8", order_id: "ord-1005", product_id: p("wild-west-showdown").id, quantity: 15, unit_price: 26.0, product: p("wild-west-showdown") },
     ],
+  },
+];
+
+export const mockLeads: Lead[] = [
+  {
+    id: "lead-01",
+    business_name: "Sample Gun Range",
+    business_type: "gun_range",
+    contact_name: "Demo Contact",
+    email: "info@example.com",
+    phone: "(555) 010-0100",
+    website: "https://example.com",
+    address: null,
+    city: "Toronto",
+    region: "ON",
+    country: "Canada",
+    source: "Demo data",
+    notes: "This is placeholder data shown in demo mode. Connect Supabase to see real leads.",
+    status: "new",
+    created_at: "2026-08-01T00:00:00Z",
   },
 ];
