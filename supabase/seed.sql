@@ -2,7 +2,7 @@
 -- Safe to run any time after schema.sql — collections/products don't
 -- depend on auth users, so this works on a totally fresh project.
 --
--- Wild West, Zombie Apocalypse, Alien Invasion, and Monster Hunt are the
+-- Wild West, Zombie Apocalypse, Alien Invasion, and Hunting Grounds are the
 -- only active collections right now; Spy Mission, Classic Series, and
 -- Limited Editions are seeded inactive so they're easy to bring back later.
 --
@@ -19,7 +19,7 @@ insert into collections (id, name, slug, subtitle, description, hero_image, sort
   (gen_random_uuid(), 'Spy Mission', 'spy-mission', 'Trust no one. Hit every mark.', 'Covert ops, double agents, and field training. Sleek design without the cliche camo.', 'https://placehold.co/1600x900/10141a/2c9ad9?text=SPY+MISSION', 4, false),
   (gen_random_uuid(), 'Classic Series', 'classic-series', 'Precision, without the noise.', 'Clean bullseyes, silhouettes, and grids for retailers who want a dependable staple alongside the fun stuff.', 'https://placehold.co/1600x900/121212/f5f4f2?text=CLASSIC+SERIES', 5, false),
   (gen_random_uuid(), 'Limited Editions', 'limited-editions', 'Here for a season. Gone for good.', 'Small-batch drops and seasonal releases. Once they sell out, they don''t come back.', 'https://placehold.co/1600x900/1a1310/e4132b?text=LIMITED+EDITIONS', 6, false),
-  (gen_random_uuid(), 'Monster Hunt', 'monster-hunt', 'The wild is watching back.', 'Apex predators lurking in the fog. A moody wilderness collection for hunters and range-goers who want their targets to feel alive.', 'https://placehold.co/1600x900/0d1420/3d8bc4?text=MONSTER+HUNT', 7, true)
+  (gen_random_uuid(), 'Hunting Grounds', 'monster-hunt', 'The wild is watching back.', 'Apex predators lurking in the fog. A moody wilderness collection for hunters and range-goers who want their targets to feel alive.', 'https://placehold.co/1600x900/1a2414/6b8f47?text=HUNTING+GROUNDS', 7, true)
 on conflict (slug) do nothing;
 
 -- ─── Products ───────────────────────────────────────────────────────────

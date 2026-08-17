@@ -124,7 +124,7 @@ function HelicopterIllustration() {
   );
 }
 
-// Decorative glowing eyes in the fog for the Monster Hunt backdrop — the
+// Decorative glowing eyes in the fog for the Hunting Grounds backdrop — the
 // "something in the dark forest is watching you" counterpart to the other
 // worlds' floating motifs. Slit pupils are cut from the eye shape with a
 // background-colored ellipse so it works over any photo behind it.
@@ -150,7 +150,7 @@ function EyesIllustration() {
   );
 }
 
-// Claw-mark slashes for the Monster Hunt frame corner.
+// Claw-mark slashes for the Hunting Grounds frame corner.
 function ClawMarks({ className }: { className?: string }) {
   return (
     <svg
@@ -199,7 +199,7 @@ const themeConfig = {
   "wild-west": { icon: Star, label: "Frontier Territory", texture: "dust" as const },
   "zombie-apocalypse": { icon: Biohazard, label: "Quarantine Zone", texture: "grime" as const },
   "alien-invasion": { icon: UfoIcon, label: "Restricted Sector", texture: "grid" as const },
-  "monster-hunt": { icon: Eye, label: "Predator Territory", texture: "fog" as const },
+  "monster-hunt": { icon: Eye, label: "Hunter's Path", texture: "fog" as const },
 };
 
 type ThemeSlug = keyof typeof themeConfig;

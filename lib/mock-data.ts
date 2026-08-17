@@ -86,12 +86,12 @@ export const mockCollections: Collection[] = [
   },
   {
     id: "col-monster-hunt",
-    name: "Monster Hunt",
+    name: "Hunting Grounds",
     slug: "monster-hunt",
     subtitle: "The wild is watching back.",
     description:
       "Apex predators lurking in the fog. A moody wilderness collection for hunters and range-goers who want their targets to feel alive.",
-    hero_image: img("monster-hunt", "0d1420", "3d8bc4", "MONSTER HUNT"),
+    hero_image: img("monster-hunt", "1a2414", "6b8f47", "HUNTING GROUNDS"),
     sort_order: 7,
     active: true,
     created_at: "2026-08-17T00:00:00Z",
