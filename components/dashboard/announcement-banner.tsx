@@ -5,10 +5,6 @@ const announcements = [
     title: "Holiday Havoc Seasonal Set drops this week",
     body: "Limited run of 20-packs — reserve inventory before it sells out.",
   },
-  {
-    title: "Free shipping threshold reminder",
-    body: "Orders over $1,000 ship free. Bundle with your next reorder to save.",
-  },
 ];
 
 export function AnnouncementBanner() {
